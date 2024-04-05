@@ -1,17 +1,55 @@
-<div id="<%= dom_id project %>">
-  <p>
-    <strong>Name:</strong>
-    <%= project.name %>
-  </p>
+<div class="container">
+  <div class="row">
+    <div class="col-md-8">
+      <!-- Afficher la première photo en haut -->
+      <% if @project.photos.attached? %>
+        <% @project.photos.each_with_index do |photo, index| %>
+          <% if index.zero? %>
+            <%= image_tag url_for(photo), class: "img-fluid mb-3" %>
+          <% end %>
+        <% end %>
+      <% end %>
 
-  <p>
-    <strong>Description:</strong>
-    <%= project.description %>
-  </p>
+      <!-- Afficher le texte du projet -->
+      <h2><%= @project.name %></h2>
+      <p><%= @project.description %></p>
 
-  <p>
-    <strong>Category:</strong>
-    <%= project.category %>
-  </p>
-
-</div>
+      <!-- Afficher les autres photos et le texte à droite et à gauche en alternance -->
+      <% if @project.photos.attached? %>
+        <% @project.photos.each_with_index do |photo, index| %>
+          <% if index.odd? %>
+            <div class="row">
+              <div class="col-md-6">
+                <%= image_tag url_for(photo), class: "img-fluid mb-3" %>
+              </div>
+              <div class="col-md-6">
+                <p><%= @project.additional_text %></p>
+              </div>
+            </div>
+          <% else %>
+            <div class="row">
+              <div class="col-md-6">
+                <p><%= @project.additional_text %></p>
+              </div>
+              <div class="col-md-6">
+                <%= image_tag url_for(photo), class: "img-fluid mb-3" %>
+              </div>
+            </div>
+          <% end %>
+        <% end %>
+      <% end %>
+    </div>
+      <!-- Afficher la galerie de photos à droite -->
+     <div class="col-md-4">
+      <h3>Galerie de photos</h3>
+      <div class="row">
+        <% if @project.photos.attached? %>
+          <% @project.photos.each do |photo| %>
+            <div class="col-md-3">
+              <%= link_to image_tag(url_for(photo), class: "img-thumbnail"), photo, target: "_blank" %>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>

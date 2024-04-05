@@ -1,0 +1,15 @@
+.photo {
+  margin-right: 8px;
+}
+
+.photo-30 {
+  margin-right: 8px;
+  width: 30%;
+  height: 250px;
+}
+
+.photo-top {
+  width: 80%; /* La photo prend toute la largeur de la card */
+  height: 100%; /* Hauteur fixe pour toutes les photos */
+  object-fit: cover;
+}

@@ -1,2 +1,30 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+<div class="container">
+  <div id="video-container">
+    <video autoplay muted loop id="video-background">
+      <source src="https://res.cloudinary.com/dqxolg01p/video/upload/v1712147571/WhatsApp_Video_2024-03-28_at_09.32.27_cii6be.mp4" type="video/mp4">
+      <!-- Ajoutez d'autres sources pour différents formats de vidéo -->
+      Your browser does not support the video tag.
+    </video>
+
+      <h1 id="title-overlay">Rénovation, agrandissement, construction neuve Hü architecture vous accompagne dans tous vos projets</h1>
+    </div>
+      <hr>
+       <h3><em>Chaque projet architecturale est fondamentalement lié à un projet de vie. Pour une famille, une commune ou une entreprise, il est essentiel de toujours partir de l'humain pour arriver au batiment. Chez Hü architecture, l'usage par les habitants est au coeur des projets</em></h3>
+      <hr>
+    <div class="container mt-5">
+  <div class="card-container" id="projects">
+    <% @projects.each do |project| %>
+      <div style="width: 18rem;" id="<%= dom_id project %>">
+        <a href="<%= project_path(project) %>">
+          <% if project.photos.attached? %>
+            <%= image_tag url_for(project.photos.first), class: "card-img-top" %>
+          <% end %>
+        </a>
+        <div class="card-body">
+          <h6 class="card-title"><%= project.name %></h6>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+</div>
